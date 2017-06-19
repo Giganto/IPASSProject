@@ -66,7 +66,7 @@ public class StageService {
 		stagiairDAO.deleteStagiair(stagiairNr);
 	}
 
-	// stages worden opgehaald. Begindatum wordt genegeerd omdat deze in het Proof of Concept verder niet nodig is. 
+	// stages worden opgehaald. 
 	public ArrayList<AfgerondeStage> getAfgerondeStages(String af, String tp, String nv, String bg, String ed) throws ParseException, SQLException {	
 		ArrayList<AfgerondeStage> stages = stageDAO.getAfgerondeStages(af, tp, nv, bg, ed);
 		return stages;
