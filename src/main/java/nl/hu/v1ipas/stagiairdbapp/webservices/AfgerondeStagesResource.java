@@ -29,7 +29,7 @@ public class AfgerondeStagesResource {
 
 		ArrayList<AfgerondeStage> stages = new ArrayList<AfgerondeStage>();
 		StageService service = ServiceProvider.getStageService();
-		stages = service.getAfgerondeStages("Diergeneeskunde", "Afstudeerstage", "HBO", "2017-06-30");
+		stages = service.getAfgerondeStages("Diergeneeskunde", "Afstudeerstage", "HBO", "2017-06-30", "2017-06-30");
 
 		for (AfgerondeStage stage : stages) {
 			JsonObjectBuilder job = Json.createObjectBuilder();
