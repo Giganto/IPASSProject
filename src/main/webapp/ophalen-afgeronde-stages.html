@@ -45,7 +45,7 @@
 					$('#myTable tbody').remove();
 					$("table").append("<tbody>");
 				    var data = { "afdeling": $("#Afdeling").val(), "type": $("#Type").val(), 
-				    		"niveau": $("#Niveau").val(), "einddatum": $("#Einddatum").val() }
+				    		"niveau": $("#Niveau").val(), "begindatum": $("#Begindatum").val(), "einddatum": $("#Einddatum").val() }
 				    var JSONdata = JSON.stringify(data);
 				    
 				    $.post("restservices/AfgerondeStages/Sturen", JSONdata, function(data) {
@@ -69,8 +69,8 @@
 				function() {
 					$('#myTable tbody').remove();
 					$("table").append("<tbody>");
-				    var data = { "afdeling": $("#Afdeling").val(), "type": $("#Type").val(), 
-				    		"niveau": $("#Niveau").val(), "einddatum": $("#Einddatum").val() }
+					var data = { "afdeling": $("#Afdeling").val(), "type": $("#Type").val(), 
+				    		"niveau": $("#Niveau").val(), "begindatum": $("#Begindatum").val(), "einddatum": $("#Einddatum").val() }
 				    var JSONdata = JSON.stringify(data);
 				    
 				    $.post("restservices/AfgerondeStages/Sturen", JSONdata, function(data) {

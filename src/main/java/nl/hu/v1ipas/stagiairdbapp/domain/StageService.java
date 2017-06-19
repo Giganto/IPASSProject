@@ -67,8 +67,8 @@ public class StageService {
 	}
 
 	// stages worden opgehaald. Begindatum wordt genegeerd omdat deze in het Proof of Concept verder niet nodig is. 
-	public ArrayList<AfgerondeStage> getAfgerondeStages(String af, String tp, String nv, String ed) throws ParseException, SQLException {	
-		ArrayList<AfgerondeStage> stages = stageDAO.getAfgerondeStages(af, tp, nv, ed);
+	public ArrayList<AfgerondeStage> getAfgerondeStages(String af, String tp, String nv, String bg, String ed) throws ParseException, SQLException {	
+		ArrayList<AfgerondeStage> stages = stageDAO.getAfgerondeStages(af, tp, nv, bg, ed);
 		return stages;
 	}
 }

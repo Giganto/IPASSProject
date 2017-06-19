@@ -52,11 +52,12 @@ public class AfgerondeStagesResource {
 		String afdeling = object.getString("afdeling");
 		String type = object.getString("type");
 		String niveau = object.getString("niveau");
+		String begindatum = object.getString("begindatum");
 		String einddatum = object.getString("einddatum");
 
 		StageService service = ServiceProvider.getStageService();
 		ArrayList<AfgerondeStage> stages = new ArrayList<AfgerondeStage>();
-		stages = service.getAfgerondeStages(afdeling, type, niveau, einddatum);
+		stages = service.getAfgerondeStages(afdeling, type, niveau, begindatum, einddatum);
 		JsonArrayBuilder jab = Json.createArrayBuilder();
 
 		for (AfgerondeStage stage : stages) {

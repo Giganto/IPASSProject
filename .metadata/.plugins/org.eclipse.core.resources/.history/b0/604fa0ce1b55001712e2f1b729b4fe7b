@@ -1,0 +1,140 @@
+package nl.hu.v1ipas.stagiairdbapp.persistence;
+
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.Date;
+
+import nl.hu.v1ipas.stagiairdbapp.domain.AfgerondeStage;
+import nl.hu.v1ipas.stagiairdbapp.domain.Stage;
+
+public class StageDAO extends BaseDAO {
+	private StagiairDAO stagiairDAO = new StagiairDAO();
+
+	// Select statement voor een Stage.
+	public Stage getStage(int stNr) throws SQLException {
+		try (Connection c = super.getConnection()) {
+			String sql = "select * from stage where stageNr = " + stNr;
+			Statement myStmt = c.createStatement();
+			ResultSet rs = myStmt.executeQuery(sql);
+
+			while (rs.next()) {
+				Stage stage = new Stage(rs.getInt("stageNr"), rs.getDate("einddatum"), rs.getString("duur"),
+						rs.getString("niveau"), rs.getString("type"), rs.getInt("afdelingNr"), rs.getInt("stagiairNr"),
+						rs.getString("status"));
+				return stage;
+			}
+		} catch (SQLException sqle) {
+			sqle.printStackTrace();
+		}
+		return null;
+	}
+
+	public int getStagiairNr(int stNr) throws SQLException {
+		try (Connection c = super.getConnection()) {
+			String sql = "select stagiairnr from stage where stageNr = " + stNr;
+			Statement myStmt = c.createStatement();
+			ResultSet rs = myStmt.executeQuery(sql);
+
+			while (rs.next()) {
+				int stagiairNr = rs.getInt("stagiairnr");
+				return stagiairNr;
+			}
+		} catch (SQLException sqle) {
+			sqle.printStackTrace();
+		}
+		return 0;
+	}
+
+	// Insert statement voor een Stage.
+	public void insertStage(Stage stage) throws SQLException {
+		try (Connection c = super.getConnection()) {
+			// stagiairnr.nextval
+			String sql = "insert into stage (stageNr, einddatum, duur, niveau, type, afdelingNr, stagiairNr) "
+					+ "values (nextval('stagenr'), '" + stage.getEinddatum() + "', '" + stage.getDuur() + "', '"
+					+ stage.getNiveau() + "', '" + stage.getType() + "', " + stage.getAfdelingNr() + ", "
+					+ stage.getStagiairNr() + ")";
+			Statement myStmt = c.createStatement();
+			myStmt.executeUpdate(sql);
+		} catch (SQLException sqle) {
+			sqle.printStackTrace();
+		}
+	}
+
+	// Update statement voor een Stage.
+	public void updateStage(int stageNr) throws SQLException {
+		// stagiairnr.nextval
+		try (Connection c = super.getConnection()) {
+			String sql = "update stage set status = 'afgerond' where stageNr =" + stageNr;
+			Statement myStmt = c.createStatement();
+			myStmt.executeUpdate(sql);
+		} catch (SQLException sqle) {
+			sqle.printStackTrace();
+		}
+	}
+
+	// Delete Statement voor een Stage.
+	public void deleteStage(int stageNr) throws SQLException {
+		try (Connection c = super.getConnection()) {
+			String sql = "delete from stage where stagenr = " + stageNr;
+			Statement myStmt = c.createStatement();
+			myStmt.executeQuery(sql);
+		} catch (SQLException sqle) {
+			sqle.printStackTrace();
+		}
+	}
+
+	// Deze methode wordt gebruikt voor Use Case "Goedkeuren/afkeuren stages".
+	// Alle stages die niet zijn afgerond worden hier opgehaald, zodat deze op de Web App getoond kunnen worden.
+	public ArrayList<String> getStageEnStagiair() throws SQLException {
+		ArrayList<String> stages = new ArrayList<String>();
+
+		try (Connection c = super.getConnection()) {
+			String sql = "select stagiair.voornaam, stagiair.achternaam, afdeling.naam, stage.niveau, stage.type, stage.stagenr "
+					+ "from stagiair, stage, afdeling "
+					+ "where stage.einddatum < current_date and stage.stagiairnr = stagiair.stagiairnr and afdeling.afdelingnr = stage.afdelingnr and stage.status is null";
+			Statement myStmt = c.createStatement();
+			ResultSet rs = myStmt.executeQuery(sql);
+
+			while (rs.next()) {
+				stages.add(rs.getString("voornaam"));
+				stages.add(rs.getString("achternaam"));
+				stages.add(rs.getString("naam"));
+				stages.add(rs.getString("niveau"));
+				stages.add(rs.getString("type"));
+				String stageNr = Integer.toString(rs.getInt("stagenr"));
+				stages.add(stageNr);
+			}
+		} catch (SQLException sqle) {
+			sqle.printStackTrace();
+		}
+		return stages;
+	}
+
+	// De beheerder kan via deze methode de afgeronde stages ophalen, gebasseerd op de keuze van de gebruiker. 
+	public ArrayList<AfgerondeStage> getAfgerondeStages(String afdeling, String type, String niveau, String einddatum) throws SQLException {
+		ArrayList<AfgerondeStage> stages = new ArrayList<AfgerondeStage>();
+		try (Connection c = super.getConnection()) {
+			String sql = "select stagiair.voornaam, stagiair.achternaam, afdeling.naam, stage.niveau, stage.type "
+					+ "from stagiair, stage, afdeling "
+					+ "where stage.stagiairnr = stagiair.stagiairnr and afdeling.afdelingnr = stage.afdelingnr and stage.status is not null"
+					+ " and afdeling.naam = '" + afdeling 
+					+ "' and stage.niveau = '" + niveau
+					+ "' and stage.type = '" + type
+					+ "' and stage.einddatum < '" + einddatum + "'";
+			Statement myStmt = c.createStatement();
+			ResultSet rs = myStmt.executeQuery(sql);
+
+			while (rs.next()) {
+				AfgerondeStage stage = new AfgerondeStage(rs.getString("voornaam"), rs.getString("achternaam"), rs.getString("naam"),
+						rs.getString("niveau"), rs.getString("type"));
+				stages.add(stage);
+			}
+		} catch (SQLException sqle) {
+			sqle.printStackTrace();
+		}
+		return stages;
+	}
+}

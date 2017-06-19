@@ -39,10 +39,10 @@
 <script>
 
 	$("#button").click( function() {
-		if ($(Voornaam).val().length > 20 || $(Voornaam).val().length == 0) { window.alert("Voornaam is te lang. Maximaal 20 characters."); }
-		else if ($(Achternaam).val().length > 20) { window.alert("Achternaam is te lang. Maximaal 20 characters."); }
-		else if ($(Plaats).val().length > 20) { window.alert("Plaats is te lang. Maximaal 20 characters."); }
-		else if ($(Adres).val().length > 20) { window.alert("Adres is te lang. Maximaal 20 characters."); }
+		if ($(Voornaam).val().length > 20 || $(Voornaam).val().length == 0) { window.alert("Voornaam is te lang of leeg. Maximaal 20 characters."); }
+		else if ($(Achternaam).val().length > 20 || $(Achternaam).val().length == 0|| $(Voornaam).val().length == 0) { window.alert("Achternaam is te lang of leeg. Maximaal 20 characters."); }
+		else if ($(Plaats).val().length > 20 || $(Plaats).val().length == 0) { window.alert("Plaats is te lang of leeg. Maximaal 20 characters."); }
+		else if ($(Adres).val().length > 20 || $(Adres).val().length == 0) { window.alert("Adres is te lang of leeg. Maximaal 20 characters."); }
 		
 		else {
 		var form = document.getElementById('theForm');

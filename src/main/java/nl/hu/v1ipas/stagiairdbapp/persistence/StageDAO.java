@@ -114,7 +114,7 @@ public class StageDAO extends BaseDAO {
 	}
 
 	// De beheerder kan via deze methode de afgeronde stages ophalen, gebasseerd op de keuze van de gebruiker. 
-	public ArrayList<AfgerondeStage> getAfgerondeStages(String afdeling, String type, String niveau, String einddatum) throws SQLException {
+	public ArrayList<AfgerondeStage> getAfgerondeStages(String afdeling, String type, String niveau, String begindatum, String einddatum) throws SQLException {
 		ArrayList<AfgerondeStage> stages = new ArrayList<AfgerondeStage>();
 		try (Connection c = super.getConnection()) {
 			String sql = "select stagiair.voornaam, stagiair.achternaam, afdeling.naam, stage.niveau, stage.type "
@@ -123,7 +123,8 @@ public class StageDAO extends BaseDAO {
 					+ " and afdeling.naam = '" + afdeling 
 					+ "' and stage.niveau = '" + niveau
 					+ "' and stage.type = '" + type
-					+ "' and stage.einddatum < '" + einddatum + "'";
+					+ "' and stage.einddatum < '" + einddatum
+					+ "' and stage.einddatum > '" + begindatum + "'";
 			Statement myStmt = c.createStatement();
 			ResultSet rs = myStmt.executeQuery(sql);
 
