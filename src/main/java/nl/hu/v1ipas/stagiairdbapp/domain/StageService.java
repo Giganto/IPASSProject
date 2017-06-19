@@ -19,7 +19,6 @@ public class StageService {
 	public void insertStagiair(String vn, String an, String pl, String ad, String af, String tp, String nv, String bd,
 			String ed) throws SQLException, ParseException {
 		DateFormat format = new SimpleDateFormat("yyyy-MM-dd");
-		System.out.println(ed);
 		Date einddatum;
 		Date begindatum;
 		try {
@@ -42,10 +41,7 @@ public class StageService {
 			duur = "Half jaar";
 		}
 
-		int aNr = 1;
-		if (af == "Natuurkunde") {
-			aNr = 2;
-		}
+		int aNr = Integer.parseInt(af);
 
 		Stagiair nieuweStagiair = new Stagiair(vn, an, pl, ad);
 		stagiairDAO.insertStagiair(nieuweStagiair);

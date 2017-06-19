@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+<head>
+<link rel="stylesheet" type="text/css" href="StyleSheet.css">
+<title>Ophalen afgeronde stages</title>
+</head>
+<body>
+	<h1>Ophalen afgeronde stages</h1>
+	<a href=ingelogd.html>Terug naar Home</a>
+	<br>
+	<form action="OphalenAfgerondeStages.do" method="post">
+		<h3>Voer onderstaande gegevens in voor het overzicht</h3>
+		Begindatum: <input id="Begindatum" type="date" name="Begindatum">
+		Eindatum: <input id="Einddatum" type="date" name="Einddatum"><br>
+		Afdeling: <select id="Afdeling" name="Afdeling">
+			<option value="Diergeneeskunde">Diergeneeskunde</option>
+			<option value="Natuurkunde">Natuurkunde</option>
+		</select><br> Stage vorm: <select id="Type" name="Type">
+			<option value="Meewerkstage">Meewerkstage</option>
+			<option value="Afstudeerstage">Afstudeerstage</option>
+		</select><br> Niveau: <select id="Niveau" name="Niveau">
+			<option value="MBO">MBO</option>
+			<option value="HBO">HBO</option>
+			<option value="WO">WO</option>
+		</select><br> 
+		<input type="button" id="button" value="Stages ophalen">
+	</form>
+	<input type="button" id="button2" value="Vergoeding berekenen">
+	<table id="myTable">
+	<thead>
+		<tr>
+			<th>Voornaam</th>
+			<th>Achternaam</th>
+			<th>Afdeling</th>
+			<th>Niveau</th>
+			<th>Type</th>
+			<th>Vergoeding</th>
+		</tr>
+		</thead>
+	</table>
+	<script src="https://code.jquery.com/jquery-3.2.0.min.js"></script>
+	<script>
+		$("#button").click(
+				function() {
+					$('#myTable tbody').remove();
+					$("table").append("<tbody>");
+				    var data = { "afdeling": $("#Afdeling").val(), "type": $("#Type").val(), 
+				    		"niveau": $("#Niveau").val(), "einddatum": $("#Einddatum").val() }
+				    var JSONdata = JSON.stringify(data);
+				    
+				    $.post("restservices/AfgerondeStages/Sturen", JSONdata, function(data) {
+				    	$.each(data, function(i, data) {
+							$("table").append(
+									"<tr><td>" + data.voornaam
+											+ "</td><td>"
+											+ data.achternaam
+											+ "</td><td>" + data.naam
+											+ "</td><td>" + data.niveau
+											+ "</td><td>" + data.type
+											+ "</td></tr>");
+						});
+				    }); 
+				    $("table").append("</tbody>");
+
+				});
+		
+
+		$("#button2").click(
+				function() {
+					$('#myTable tbody').remove();
+					$("table").append("<tbody>");
+				    var data = { "afdeling": $("#Afdeling").val(), "type": $("#Type").val(), 
+				    		"niveau": $("#Niveau").val(), "einddatum": $("#Einddatum").val() }
+				    var JSONdata = JSON.stringify(data);
+				    
+				    $.post("restservices/AfgerondeStages/Sturen", JSONdata, function(data) {
+				    	$.each(data, function(i, data) {
+							$("table").append(
+									"<tr><td>" + data.voornaam
+											+ "</td><td>"
+											+ data.achternaam
+											+ "</td><td>" + data.naam
+											+ "</td><td>" + data.niveau
+											+ "</td><td>" + data.type
+											+ "</td><td>500</td></tr>");
+						});
+				    }); 
+				    $("table").append("</tbody>");
+
+				});
+		
+
+	</script>
+</body>
+</html>

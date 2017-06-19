@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+<link rel="stylesheet" type="text/css" href="StyleSheet.css">
+<title>Aanmelden stage</title>
+</head>
+<body>
+	<h1>Meld hier je stage aan</h1>
+	<a href=index.html>Terug naar Home</a>
+	<br>
+	<form action="AanmeldenStage.do" method="get">
+		<h3>Vul hier je persoonlijke gegevens in.</h3>
+		Voornaam: <input id="Voornaam" type="text" name="Voornaam"><br>
+		Achternaam: <input id="Achternaam" type="text" name="Achternaam"><br>
+		Plaats: <input id="Plaats" type="text" name="Plaats"><br>
+		Adres: <input id="Adres" type="text" name="Adres"><br> 
+
+		<h3>Vul hier je stage gegevens in.</h3>
+		Afdeling: <select id="Afdeling" name="Afdeling">
+			<option value="Diergeneeskunde">Diergeneeskunde</option>
+			<option value="Natuurkunde">Natuurkunde</option>
+		</select><br> 
+		Stage vorm: <select id="Type" name="Type">
+			<option value="Meewerkstage">Meewerkstage</option>
+			<option value="Afstudeerstage">Afstudeerstage</option>
+		</select><br> 
+		Niveau: <select id="Niveau" name="Niveau">
+			<option value="MBO">MBO</option>
+			<option value="HBO">HBO</option>
+			<option value="WO">WO</option>
+		</select><br> 
+		Begindatum: <input id="Begindatum" type="date" name="Begindatum"><br>
+		Eindatum: <input id="Einddatum" type="date" name="Einddatum"><br> 
+		<input type="submit" value="Aanmelden" />
+	</form>
+</body>
+</html>
