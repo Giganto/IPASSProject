@@ -1,0 +1,54 @@
+package nl.hu.v1ipas.stagiairdbapp.servlets;
+
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.sql.SQLException;
+import java.text.ParseException;
+import java.util.ArrayList;
+
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import nl.hu.v1ipas.stagiairdbapp.domain.ServiceProvider;
+import nl.hu.v1ipas.stagiairdbapp.domain.StageService;
+
+@WebServlet(urlPatterns = "/Goedkeuren.do")
+public class GoedkeurenAfkeurenStageServlet extends HttpServlet {
+	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		ArrayList<String> stages = new ArrayList<String>();
+		
+		StageService service = ServiceProvider.getStageService();
+		try {
+			stages = service.getStages();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} 
+		
+		int i = stages.size();
+		
+		PrintWriter out = resp.getWriter();
+		resp.setContentType("text/html");
+		out.println("<!DOCTYPE html>");
+		out.println("<html>");
+		out.println(" <head><link rel=\"stylesheet\" type=\"text/css\" href=\"StyleSheet.css\"></title>");
+		out.println(" <title>Stage aangemeld</title></head>");
+		out.println(" <body>");
+		out.println(" <h2>Voor deze stages is de einddatum al verstreken.</h2>");
+		out.println("<form action=\"Afhandelen.do\"><table><tr><th>Voornaam</th><th>Achternaam</th><th>Afdeling</th><th>Niveau</th><th>Type</th><th>Afgerond?</th><th>Verwijderen?</th>");
+		for(int x = 0; x < i; x+=6){
+			out.println("<tr><td>" + stages.get(x) + "</td><td>" + stages.get(x+1) + "</td><td>" + stages.get(x+2) + 
+					"</td><td>" + stages.get(x+3) + "</td><td>" + stages.get(x+4) + "</td>" +
+					"<td><input type=\"checkbox\" name=\"Afgerond" + x +"\" value=\"Afgerond\"</td>"
+					+ "<td><input type=\"checkbox\" name=\"Verwijderen" + x +"\" value=\"Verwijderd\"</td></tr>");
+		}
+		out.println("<input type=\"submit\" value=\"afhandelen\" />");
+		out.println("</form>");
+		out.println("</table>");
+		out.println(" <a href=ingelogd.html>Terug naar Home</a>");
+		out.println(" </body>");
+		out.println("</html>");
+	}
+}
