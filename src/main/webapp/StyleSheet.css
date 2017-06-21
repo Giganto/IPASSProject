@@ -38,7 +38,7 @@ body {
 }
 
 #tr:nth-child(even) {
-    background-color: #dddddd;
+    background-color: #ebebe0;
 }
 
 table, th, td {
@@ -59,7 +59,7 @@ table, th, td {
 
   th{
       color: white;
-      background: #1a9fd9;
+      background: #ebebe0;
       width: 100px;
       height:30px;
     }
