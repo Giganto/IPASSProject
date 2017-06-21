@@ -77,7 +77,8 @@
 				    var JSONdata = JSON.stringify(data);
 				    
 					var vergoeding = 400; 
-					if (var afdeling = document.getElementById("Afdeling").value == "Diergeneeskunde") {
+					var afdeling = document.getElementById("Afdeling").value
+					if (afdeling == "Diergeneeskunde") {
 						vergoeding = vergoeding * 1.5;
 					}
 					
