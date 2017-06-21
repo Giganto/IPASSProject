@@ -34,7 +34,7 @@ public class AfhandelenStagesServlet extends HttpServlet {
 		out.println("</html>");
 
 		try {
-			stages = service.getStages();
+			stages = service.getStageEnStagiair();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
