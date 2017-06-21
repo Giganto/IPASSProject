@@ -21,28 +21,28 @@ import nl.hu.v1ipas.stagiairdbapp.domain.StageService;
 
 @Path("/AfgerondeStages")
 public class AfgerondeStagesResource {
-	@GET
-	@Path("/Ophalen")
-	@Produces("application/json")
-	public String getStages() throws ParseException, SQLException {
-		JsonArrayBuilder jab = Json.createArrayBuilder();
-
-		ArrayList<AfgerondeStage> stages = new ArrayList<AfgerondeStage>();
-		StageService service = ServiceProvider.getStageService();
-		stages = service.getAfgerondeStages("Diergeneeskunde", "Afstudeerstage", "HBO", "2017-06-30", "2017-06-30");
-
-		for (AfgerondeStage stage : stages) {
-			JsonObjectBuilder job = Json.createObjectBuilder();
-			job.add("voornaam", stage.getVoornaam());
-			job.add("achternaam", stage.getAchternaam());
-			job.add("naam", stage.getNaam());
-			job.add("niveau", stage.getNiveau());
-			job.add("type", stage.getType());
-			jab.add(job);
-		}
-		JsonArray array = jab.build();
-		return array.toString();
-	}
+//	@GET
+//	@Path("/Ophalen")
+//	@Produces("application/json")
+//	public String getStages() throws ParseException, SQLException {
+//		JsonArrayBuilder jab = Json.createArrayBuilder();
+//
+//		ArrayList<AfgerondeStage> stages = new ArrayList<AfgerondeStage>();
+//		StageService service = ServiceProvider.getStageService();
+//		stages = service.getAfgerondeStages("Diergeneeskunde", "Afstudeerstage", "HBO", "2017-06-30", "2017-06-30");
+//
+//		for (AfgerondeStage stage : stages) {
+//			JsonObjectBuilder job = Json.createObjectBuilder();
+//			job.add("voornaam", stage.getVoornaam());
+//			job.add("achternaam", stage.getAchternaam());
+//			job.add("naam", stage.getNaam());
+//			job.add("niveau", stage.getNiveau());
+//			job.add("type", stage.getType());
+//			jab.add(job);
+//		}
+//		JsonArray array = jab.build();
+//		return array.toString();
+//	}
 
 	@POST
 	@Path("/Sturen")

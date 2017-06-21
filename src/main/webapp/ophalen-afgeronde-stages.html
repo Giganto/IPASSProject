@@ -76,13 +76,26 @@
 				    		"niveau": $("#Niveau").val(), "begindatum": $("#Begindatum").val(), "einddatum": $("#Einddatum").val() }
 				    var JSONdata = JSON.stringify(data);
 				    
-					var vergoeding = 400; 
-					var afdeling = document.getElementById("Afdeling").value
-					if (afdeling == "Diergeneeskunde") {
+					var vergoeding = 100; 
+					var niveau = document.getElementById("Niveau").value;
+					var type = document.getElementById("Type").value;
+					var afdeling = document.getElementById("Afdeling").value;
+					
+					if (nivaeu == "HBO") {
+						vergoeding = vergoeding * 1.5;
+					} else if (niveau == "WO") {
+						vergoeding = vergoeding * 2;
+					}
+					
+					if (type == "Afstudeerstage") {
 						vergoeding = vergoeding * 1.5;
 					}
 					
-					
+					if (afdeling == "Diergeneeskunde") {
+						vergoeding = vergoeding * 1.5;
+					} else if (afdeling == "Immunologie") {
+						vergoeding = vergoeding * 1.5;
+					}
 					
 				    $.post("restservices/AfgerondeStages/Sturen", JSONdata, function(data) {
 				    	$.each(data, function(i, data) {
