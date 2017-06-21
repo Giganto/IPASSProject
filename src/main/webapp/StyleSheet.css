@@ -2,45 +2,6 @@ body {
 	background-color: #ebebe0;
 }
 
-#titleML {
-	color: white;
-	float: left;
-	width: 100%;
-	background-color: grey;
-}
-
-#MLLabels {
-	line-height: 30%;
-}
-
-#titleWI {
-	color: white;
-	float: left;
-	width: 100%;
-	background-color: grey;
-}
-
-#WILabels {
-	line-height: 30%;
-}
-
-#titleCL {
-	color: white;
-	float: left;
-	width: 100%;
-	background-color: grey;
-}
-
-#CLTable {
-	width: 100%;
-	background-color: grey;
-	cursor: pointer;
-}
-
-#tr:nth-child(even) {
-    background-color: #ebebe0;
-}
-
 table, th, td {
       border: 1px solid black;
     }
@@ -59,8 +20,11 @@ table, th, td {
 
   th{
       color: white;
-      background: #ebebe0;
+      background: #1a9fd9;
       width: 100px;
       height:30px;
     }
-    
+
+#tr:nth-child(even) {
+    background-color: #dddddd;
+}
