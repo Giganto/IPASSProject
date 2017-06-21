@@ -26,9 +26,9 @@
 			<option value="HBO">HBO</option>
 			<option value="WO">WO</option>
 		</select><br> 
-		<input type="button" id="button" value="Stages ophalen">
+		<input type="button" id="button" value="Stages ophalen"><br>
 	</form>
-	<input type="button" id="button2" value="Vergoeding berekenen">
+	<input type="button" id="button2" value="Vergoeding berekenen"><br>
 	<table id="myTable">
 	<thead>
 		<tr>
@@ -40,7 +40,8 @@
 			<th>Vergoeding</th>
 		</tr>
 		</thead>
-	</table>
+	</table><br>
+	<button id="btnExport" onclick="spreadsheetExcel();"> Spreadsheet creëren </button>
 	<script src="https://code.jquery.com/jquery-3.2.0.min.js"></script>
 	<script>
 		$("#button").click(
@@ -110,8 +111,7 @@
 						});
 				    }); 
 				    $("table").append("</tbody>");
-				    $("body").append("<button id=\"btnExport\" onclick=\"spreadsheetExcel();\"> Spreadsheet creëren </button>");
-
+				   
 				});
 		function spreadsheetExcel()
 		{
