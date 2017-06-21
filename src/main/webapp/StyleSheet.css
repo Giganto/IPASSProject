@@ -36,6 +36,15 @@ body {
 	background-color: grey;
 	cursor: pointer;
 }
+
+#tr:nth-child(even) {
+    background-color: #dddddd;
+}
+
+table, th, td {
+      border: 1px solid black;
+    }
+    
 #table {
     font-family: arial, sans-serif;
     border-collapse: collapse;
@@ -48,6 +57,9 @@ body {
     padding: 8px;
 }
 
-#tr:nth-child(even) {
-    background-color: #dddddd;
-}
+  th{
+      color: white;
+      background: #1a9fd9;
+      width: 100px;
+      height:30px;
+    }
