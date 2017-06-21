@@ -8,24 +8,6 @@ import java.sql.Statement;
 import nl.hu.v1ipas.stagiairdbapp.domain.Stagiair;
 
 public class StagiairDAO extends BaseDAO {
-//	// Select statement voor een Stagiair.
-//	public Stagiair getStagiair(int sNr) throws SQLException {
-//		try (Connection c = super.getConnection()) {
-//			String sql = "select * from stagiair where stagiairnr = " + sNr;
-//			Statement myStmt = c.createStatement();
-//			ResultSet rs = myStmt.executeQuery(sql);
-//
-//			while (rs.next()) {
-//				Stagiair stagiair = new Stagiair(rs.getInt("stagiairNr"), rs.getString("voornaam"),
-//						rs.getString("achternaam"), rs.getString("plaats"), rs.getString("adres"));
-//				return stagiair;
-//			}
-//		} catch (SQLException sqle) {
-//			sqle.printStackTrace();
-//		}
-//		return null;
-//	}
-
 	// Insert statement voor een Stagiair
 	public void insertStagiair(Stagiair stagiair) throws SQLException {
 		try (Connection c = super.getConnection()) {
@@ -50,6 +32,8 @@ public class StagiairDAO extends BaseDAO {
 		}
 	}
 
+	
+	// Hiermee krijg je het laatst ingevoerd stagiairnr, zodat deze bij het invoeren van een stage kan worden gebruikt.
 	public int getStagiairNr() throws SQLException {
 		try (Connection c = super.getConnection()) {
 			String sql = "SELECT max(stagiairnr) as max FROM stagiair";
