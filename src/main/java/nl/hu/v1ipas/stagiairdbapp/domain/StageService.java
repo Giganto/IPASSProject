@@ -67,8 +67,8 @@ public class StageService {
 	}
 
 	// stages worden opgehaald. 
-	public ArrayList<AfgerondeStage> getAfgerondeStages(String af, String tp, String nv, String bg, String ed) throws ParseException, SQLException {	
-		ArrayList<AfgerondeStage> stages = stageDAO.getAfgerondeStages(af, tp, nv, bg, ed);
+	public ArrayList<AfgerondeStage> getAfgerondeStages(String af, String tp, String nv, String bd, String ed) throws ParseException, SQLException {	
+		ArrayList<AfgerondeStage> stages = stageDAO.getAfgerondeStages(af, tp, nv, bd, ed);
 		return stages;
 	}
 }
