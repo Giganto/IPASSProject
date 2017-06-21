@@ -41,7 +41,6 @@
 		</tr>
 		</thead>
 	</table>
-	<button id="btnExport" onclick="spreadsheetExcel();"> Spreadsheet </button>
 	<script src="https://code.jquery.com/jquery-3.2.0.min.js"></script>
 	<script>
 		$("#button").click(
@@ -111,6 +110,7 @@
 						});
 				    }); 
 				    $("table").append("</tbody>");
+				    $("body").append("<button id=\"btnExport\" onclick=\"spreadsheetExcel();\"> Spreadsheet creëren </button>");
 
 				});
 		function spreadsheetExcel()

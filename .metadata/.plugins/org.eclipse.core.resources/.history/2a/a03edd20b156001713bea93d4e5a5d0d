@@ -1,0 +1,27 @@
+	<head>
+		<link rel="stylesheet" type="text/css" href="StyleSheet.css">
+		<title>Inloggen</title>
+	</head>
+	<body>
+		<h1>Vul hier uw inloggegevens in</h1>
+	<form>
+		Inlognaam: <input id="Inlognaam" type="text" name="Inlognaam"><br>
+		Wachtwoord: <input id="Wachtwoord" type="text" name="Wachtwoord"><br>
+		<input type="button" id="button" value="Inloggen">
+	</form>
+	
+	<a href=index.html>Terug naar Home</a><br>
+	</body>
+	<script src="https://code.jquery.com/jquery-3.2.0.min.js"></script>
+	<script>
+		$("#button").on('click', function() {
+			var inlog = document.getElementById ( "Inlognaam" ).value;
+			var ww = document.getElementById("Wachtwoord").value;
+			if (inlog == "A") {
+				if (ww == "A") {
+					window.location.href = "ingelogd.html";
+				}
+			}
+		});
+	</script>
+</html>
