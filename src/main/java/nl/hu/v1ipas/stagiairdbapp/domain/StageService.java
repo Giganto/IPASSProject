@@ -16,7 +16,7 @@ public class StageService {
 
 	// Insert een Stagiair en een Stage tegelijk, omdat ze aan elkaar verbonden
 	// zijn.
-	public void insertStagiair(String vn, String an, String pl, String ad, String af, String tp, String nv, String bd,
+	public void insertStagiairEnStage(String vn, String an, String pl, String ad, String af, String tp, String nv, String bd,
 			String ed) throws SQLException, ParseException {
 		DateFormat format = new SimpleDateFormat("yyyy-MM-dd");
 		Date einddatum;
@@ -51,7 +51,7 @@ public class StageService {
 		stageDAO.insertStage(nieuweStage);
 	}
 
-	public ArrayList<String> getStages() throws SQLException {
+	public ArrayList<String> getStageEnStagiair() throws SQLException {
 		ArrayList<String> stages = stageDAO.getStageEnStagiair();
 		return stages;
 	}

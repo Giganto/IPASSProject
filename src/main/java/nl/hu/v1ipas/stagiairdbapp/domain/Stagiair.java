@@ -61,9 +61,4 @@ public class Stagiair {
 	public void setAdres(String adres) {
 		this.adres = adres;
 	}
-
-	public String toString() {
-		return "stagiairNr: " + stagiairNr + "\nVoornaam: " + voornaam + "\nAchternaam: " + achternaam + "\nPlaats:"
-				+ plaats + "\nAdres: " + adres;
-	}
 }

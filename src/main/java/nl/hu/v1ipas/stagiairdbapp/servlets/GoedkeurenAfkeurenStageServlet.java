@@ -22,7 +22,7 @@ public class GoedkeurenAfkeurenStageServlet extends HttpServlet {
 		
 		StageService service = ServiceProvider.getStageService();
 		try {
-			stages = service.getStages();
+			stages = service.getStageEnStagiair();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} 

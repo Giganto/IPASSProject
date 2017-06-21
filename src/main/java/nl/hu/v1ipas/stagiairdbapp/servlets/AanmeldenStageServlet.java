@@ -41,7 +41,7 @@ public class AanmeldenStageServlet extends HttpServlet {
 		
 		StageService service = ServiceProvider.getStageService();
 		try {
-			service.insertStagiair(voornaam, achternaam, plaats, adres, afdeling, type, niveau, begindatum, einddatum);
+			service.insertStagiairEnStage(voornaam, achternaam, plaats, adres, afdeling, type, niveau, begindatum, einddatum);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} catch (ParseException e) {

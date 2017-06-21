@@ -44,8 +44,4 @@ public class Afdeling {
 	public void setAfdelingNr(int afdelingNr) {
 		this.afdelingNr = afdelingNr;
 	}
-
-	public String toString() {
-		return "Afdeling: " + naam + "\nHoofd: " + hoofd + "\nLocatie: " + locatie + "\nAfdelingnummer: " + afdelingNr;
-	}
 }

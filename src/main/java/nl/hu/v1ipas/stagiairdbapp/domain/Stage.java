@@ -95,9 +95,4 @@ public class Stage {
 	public void setStatus(String status) {
 		this.status = status;
 	}
-
-	public String toString() {
-		return stageNr + duur + niveau + type + afdelingNr + stagiairNr + status;
-	}
-
 }
