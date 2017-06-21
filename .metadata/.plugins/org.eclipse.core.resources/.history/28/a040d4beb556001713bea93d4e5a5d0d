@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html>
+<head>
+<link rel="stylesheet" type="text/css" href="StyleSheet.css">
+<title>Ophalen afgeronde stages</title>
+</head>
+<body>
+	<h1>Ophalen afgeronde stages</h1>
+	<a href=ingelogd.html>Terug naar Home</a>
+	<br>
+	<form action="OphalenAfgerondeStages.do" method="post">
+		<h3>Voer onderstaande gegevens in voor het overzicht</h3>
+		Begindatum: <input id="Begindatum" type="date" name="Begindatum" value="2017-06-01">
+		Eindatum: <input id="Einddatum" type="date" name="Einddatum" value="2017-06-01"><br>
+		Afdeling: <select id="Afdeling" name="Afdeling">
+			<option value="Diergeneeskunde">Diergeneeskunde</option>
+			<option value="Natuurkunde">Natuurkunde</option>
+			<option value="Biochemie">Biochemie</option>
+			<option value="Pathobiologie">Pathobiologie</option>
+			<option value="Immunologie">Immunologie</option>
+		</select><br> Stage vorm: <select id="Type" name="Type">
+			<option value="Meewerkstage">Meewerkstage</option>
+			<option value="Afstudeerstage">Afstudeerstage</option>
+		</select><br> Niveau: <select id="Niveau" name="Niveau">
+			<option value="MBO">MBO</option>
+			<option value="HBO">HBO</option>
+			<option value="WO">WO</option>
+		</select><br> 
+		<input type="button" id="button" value="Stages ophalen"><br>
+	</form>
+	<input type="button" id="button2" value="Vergoeding berekenen"><br>
+	<table id="myTable">
+	<thead>
+		<tr>
+			<th>Voornaam</th>
+			<th>Achternaam</th>
+			<th>Afdeling</th>
+			<th>Niveau</th>
+			<th>Type</th>
+			<th>Vergoeding</th>
+		</tr>
+		</thead>
+	</table><br>
+	<button id="btnExport" onclick="spreadsheetExcel();"> Spreadsheet creëren </button>
+	<script src="https://code.jquery.com/jquery-3.2.0.min.js"></script>
+	<script>
+		$("#button").click(
+				function() {
+					$('#myTable tbody').remove();
+					$("table").append("<tbody>");
+				    var data = { "afdeling": $("#Afdeling").val(), "type": $("#Type").val(), 
+				    		"niveau": $("#Niveau").val(), "begindatum": $("#Begindatum").val(), "einddatum": $("#Einddatum").val() }
+				    var JSONdata = JSON.stringify(data);
+				    
+				    $.post("restservices/AfgerondeStages/Sturen", JSONdata, function(data) {
+				    	$.each(data, function(i, data) {
+							$("table").append(
+									"<tr><td>" + data.voornaam
+											+ "</td><td>"
+											+ data.achternaam
+											+ "</td><td>" + data.naam
+											+ "</td><td>" + data.niveau
+											+ "</td><td>" + data.type
+											+ "</td></tr>");
+						});
+				    }); 
+				    $("table").append("</tbody>");
+
+				});
+		
+
+		$("#button2").click(
+				function() {
+					$('#myTable tbody').remove();
+					$("table").append("<tbody>");
+					var data = { "afdeling": $("#Afdeling").val(), "type": $("#Type").val(), 
+				    		"niveau": $("#Niveau").val(), "begindatum": $("#Begindatum").val(), "einddatum": $("#Einddatum").val() }
+				    var JSONdata = JSON.stringify(data);
+				    
+					var vergoeding = 100; 
+					var niveau = document.getElementById("Niveau").value;
+					var type = document.getElementById("Type").value;
+					var afdeling = document.getElementById("Afdeling").value;
+					
+					if (niveau == "HBO") {
+						vergoeding = vergoeding * 1.5;
+					} else if (niveau == "WO") {
+						vergoeding = vergoeding * 2;
+					}
+					
+					if (type == "Afstudeerstage") {
+						vergoeding = vergoeding * 1.5;
+					}
+					
+					if (afdeling == "Diergeneeskunde") {
+						vergoeding = vergoeding * 1.5;
+					} else if (afdeling == "Immunologie") {
+						vergoeding = vergoeding * 1.5;
+					}
+					
+				    $.post("restservices/AfgerondeStages/Sturen", JSONdata, function(data) {
+				    	$.each(data, function(i, data) {
+							$("table").append(
+									"<tr><td>" + data.voornaam
+											+ "</td><td>"
+											+ data.achternaam
+											+ "</td><td>" + data.naam
+											+ "</td><td>" + data.niveau
+											+ "</td><td>" + data.type
+											+ "</td><td>" + vergoeding + "</td></tr>");
+						});
+				    }); 
+				    $("table").append("</tbody>");
+				   
+				});
+		function spreadsheetExcel()
+		{
+		    var tab_text="<table border='2px'><tr bgcolor='#87AFC6'>";
+		    var textRange; var j=0;
+		    tab = document.getElementById('myTable'); 
+
+		    for(j = 0 ; j < tab.rows.length ; j++) 
+		    {     
+		        tab_text=tab_text+tab.rows[j].innerHTML+"</tr>";
+		        //tab_text=tab_text+"</tr>";
+		    }
+
+		    tab_text=tab_text+"</table>";
+		    tab_text= tab_text.replace(/<A[^>]*>|<\/A>/g, "");//remove if u want links in your table
+		    tab_text= tab_text.replace(/<img[^>]*>/gi,""); // remove if u want images in your table
+		    tab_text= tab_text.replace(/<input[^>]*>|<\/input>/gi, ""); // reomves input params
+
+		    var ua = window.navigator.userAgent;
+		    var msie = ua.indexOf("MSIE "); 
+
+		    if (msie > 0 || !!navigator.userAgent.match(/Trident.*rv\:11\./))      // If Internet Explorer
+		    {
+		        txtArea1.document.open("txt/html","replace");
+		        txtArea1.document.write(tab_text);
+		        txtArea1.document.close();
+		        txtArea1.focus(); 
+		        sa=txtArea1.document.execCommand("SaveAs",true);
+		    }  
+		    else                 
+		        sa = window.open('data:application/vnd.ms-excel,' + encodeURIComponent(tab_text));  
+
+		    return (sa);
+		}	
+
+	</script>
+</body>
+</html>

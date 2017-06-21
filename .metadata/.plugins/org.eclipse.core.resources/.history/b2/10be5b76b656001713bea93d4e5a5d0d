@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+<link rel="stylesheet" type="text/css" href="StyleSheet.css">
+<title>Aanmelden stage</title>
+</head>
+<body>
+	<h1>Meld hier je stage aan</h1>
+	<a href=index.html>Terug naar Home</a>
+	<br>
+	<form action="AanmeldenStage.do" id="theForm" method="get">
+		<h3>Vul hier je persoonlijke gegevens in.</h3>
+		Voornaam: 	<input id="Voornaam" type="text" name="Voornaam"><br>
+		Achternaam: <input id="Achternaam" type="text" name="Achternaam"><br>
+		Plaats: 	<input id="Plaats" type="text" name="Plaats"><br>
+		Adres: 		<input id="Adres" type="text" name="Adres"><br>
+
+		<h3>Vul hier je stage gegevens in.</h3>
+		Afdeling: 	<select id="Afdeling" name="Afdeling">
+			<option value="1">Diergeneeskunde</option>
+			<option value="2">Natuurkunde</option>
+			<option value="3">Biochemie</option>
+			<option value="4">Pathobiologie</option>
+			<option value="5">Immunologie</option>
+		</select><br> Stage vorm: <select id="Type" name="Type">
+			<option value="Meewerkstage">Meewerkstage</option>
+			<option value="Afstudeerstage">Afstudeerstage</option>
+		</select><br> Niveau: <select id="Niveau" name="Niveau">
+			<option value="MBO">MBO</option>
+			<option value="HBO">HBO</option>
+			<option value="WO">WO</option>
+		</select><br> 
+		Begindatum: 	<input id="Begindatum" type="date"name="Begindatum" value="2017-06-01"><br> 
+		Eindatum: 	<input id="Einddatum" type="date" name="Einddatum" value="2017-06-01"><br> 
+		<input type="button" id="button" value="Aanmelden" />
+	</form>
+</body>
+<script src="https://code.jquery.com/jquery-3.2.0.min.js"></script>
+<script>
+
+	$("#button").click( function() {
+		if ($(Voornaam).val().length > 20 || $(Voornaam).val().length == 0) { window.alert("Voornaam is te lang of leeg. Maximaal 20 characters."); }
+		else if ($(Achternaam).val().length > 20 || $(Achternaam).val().length == 0|| $(Voornaam).val().length == 0) { window.alert("Achternaam is te lang of leeg. Maximaal 20 characters."); }
+		else if ($(Plaats).val().length > 20 || $(Plaats).val().length == 0) { window.alert("Plaats is te lang of leeg. Maximaal 20 characters."); }
+		else if ($(Adres).val().length > 20 || $(Adres).val().length == 0) { window.alert("Adres is te lang of leeg. Maximaal 20 characters."); }
+		
+		else {
+		var form = document.getElementById('theForm');
+		document.getElementById('theForm').submit();
+		}
+	});
+</script>
+</html>
